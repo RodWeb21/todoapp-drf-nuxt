@@ -12,6 +12,15 @@ const updateTodo = async (todo) => {
     console.error('Error al actualizar tarea:', error);
   }
 };
+
+const deleteTodo = async (id) => {
+  try {
+    await $fetch(`http://localhost:8000/api/todos/${id}/`, { method: 'DELETE' });
+    todos.value = todos.value.filter(todo => todo.id !== id);
+  } catch (error) {
+    console.error('Error al eliminar tarea:', error);
+  }
+};
 </script>
 
 <template>
