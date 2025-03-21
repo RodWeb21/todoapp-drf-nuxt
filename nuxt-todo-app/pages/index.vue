@@ -1,6 +1,6 @@
 <script setup>
 const newTodoTitle = ref('');
-const { data: todos } = await useFetch('http://localhost:8000/api/todos/');
+const { data: todos, error, status } = useFetch('http://localhost:8000/api/todos/');
 
 const addTodo = async () => {
   if (!newTodoTitle.value) return;
@@ -53,6 +53,8 @@ const deleteTodo = async (id) => {
       <input type="text" v-model="newTodoTitle" placeholder="Nueva tarea" />
       <button type="submit">Agregar</button>
     </form>
+    <div v-if="status === 'pending'">Cargando tareas...</div>
+    <div v-if="error">Error al cargar las tareas</div>
   </div>
 </template>
 
